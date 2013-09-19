@@ -1,5 +1,18 @@
 #include <iostream.h>
+#include <stdarg.h>
 
+
+int ADD_TWO ( int i ) {
+    
+    return i + 2;
+           
+    }
+    
+int SUBSTRACT_FIVE ( int i ) {
+    
+    return i - 5;
+           
+           }
 
 int SQUARE_NUMBER ( int i ) {
     
@@ -51,7 +64,7 @@ int CLOSEST_PRIME ( int i ) {
     
     if ( i < 0 ){ i = -i; neg = 1; }
     ok = 1;
-    for ( it=2; it<i/2 && ok == 1; it++ )
+    for ( it = 2; it <= i/2 && ok == 1; it++ )
         if ( i % it == 0 ) ok = 0;
     if( ok == 1 ){ 
         if ( neg == 1 ) return -i;
@@ -62,7 +75,7 @@ int CLOSEST_PRIME ( int i ) {
     minus = i-1;
     while ( ok == 0 ){
           ok = 1;
-          for ( it=2; it<minus/2 && ok == 1; it++ )
+          for ( it = 2; it < minus/2 && ok == 1; it++ )
               if ( minus % it == 0 ) ok = 0;
           if ( ok == 0 ) minus --;
           }
@@ -87,6 +100,23 @@ int CLOSEST_PRIME ( int i ) {
        
     }
     
+void print ( int no_arguments, ... ) {
+     
+     int it;
+     va_list argument;
+     va_start ( argument, no_arguments );
+     
+     cout << "[ ";
+     for ( it = 0; it < no_arguments; it++ ){
+         cout << va_arg ( argument, int );
+         if ( it < no_arguments-1 ) cout << ", ";
+         else cout << " ]\n";
+         }
+     
+     va_end( argument );
+     
+     }
+    
 
     
 int main ( ) {
@@ -96,12 +126,12 @@ int main ( ) {
     cout << "\n NUMBER: ";
     cin >> i;
     
-    cout << "\n SQUARE_NUMBER: " << SQUARE_NUMBER( i );
-    cout << "\n NEGATIVE_NUMBER: " << NEGATIVE_NUMBER( i );
-    cout << "\n MIRRORED_NUMBER: " << MIRRORED_NUMBER( i );
-    cout << "\n SUM_OF_DIGITS: " << SUM_OF_DIGITS( i );
-    cout << "\n CLOSEST_PRIME: " << CLOSEST_PRIME( i );
-    cout << "\n\n";
+    cout << "\n [ " << i << ", ADD_TWO, " << "SUBSTRACT_FIVE ] = ";
+    print ( 2, ADD_TWO( i ), SUBSTRACT_FIVE( i ) );
+    
+    cout << "\n [ " << i <<  ", SQUARE_NUMBER, " << "NEGATIVE_NUMBER, " << "MIRRORED_NUMBER, " << "SUM_OF_DIGITS, " << "CLOSEST_PRIME ] = ";
+    print ( 5, SQUARE_NUMBER( i ), NEGATIVE_NUMBER( i ), MIRRORED_NUMBER( i ), SUM_OF_DIGITS( i ), CLOSEST_PRIME( i ) );
+    cout << "\n\n\n";
     
     
     system("PAUSE");
@@ -109,6 +139,13 @@ int main ( ) {
 
     }
     
+
+    
+
+    
+    
+    
+
 
     
 
